@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function WebSearchPage() {
   return (
-    <div>
+    <div className='text-red-700'>
       WebSearchPage
     </div>
   )
