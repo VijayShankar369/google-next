@@ -1,15 +1,15 @@
 import Link from "next/link";
-import WebSearchResults from '@/components/WebSearchResults';
+import WebSearchResults from "@/components/WebSearchResults";
 
 export default async function WebSearchPage({ searchParams }) {
-  const searchTerm = searchParams.searchTerm;
+  const searchTerm = searchParams.searchTerm; // ✅ Use dot notation for plain object
 
   if (!searchTerm) {
     return <div>Please enter a search term.</div>;
   }
 
   const response = await fetch(
-    `https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}x&cx=${process.env.CONTEXT_KEY}&q=${searchTerm}`
+    `https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${searchTerm}`
   );
 
   if (!response.ok) {
@@ -23,11 +23,11 @@ export default async function WebSearchPage({ searchParams }) {
     return (
       <div className="flex flex-col justify-center items-center pt-10">
         <h1 className="text-3xl mb-4">
-          No results found for {searchParams.searchTerm}
+          No results found for {searchTerm}
         </h1>
         <p className="text-lg">
-          Try searching the web or images for something else {' '}
-          <Link href='/' className="text-blue-500">
+          Try searching the web or images for something else{" "}
+          <Link href="/" className="text-blue-500">
             Home
           </Link>
         </p>
@@ -35,10 +35,5 @@ export default async function WebSearchPage({ searchParams }) {
     );
   }
 
-  
-  return (
-    <div>
-      {results && <WebSearchResults results={data}/>}
-    </div>
-  );
+  return <WebSearchResults results={data} />;
 }
