@@ -2,16 +2,17 @@ import Link from "next/link";
 import ImageSearchResults from "@/components/ImageSearchResults";
 
 export default async function ImageSearchPage({ searchParams }) {
-
-  const startIndex = searchParams.start || '1';
+  const startIndex = searchParams.start || "1";
   const searchTerm = searchParams.searchTerm;
+
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 
   if (!searchTerm) {
     return <div>Please enter a search term.</div>;
   }
 
   const response = await fetch(
-    `https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}x&cx=${process.env.CONTEXT_KEY}&q=${searchTerm}&searchType=image&start=${startIndex}`
+    `https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${searchTerm}&searchType=image&start=${startIndex}`
   );
 
   if (!response.ok) {

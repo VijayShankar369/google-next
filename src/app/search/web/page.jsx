@@ -1,9 +1,11 @@
 import Link from "next/link";
 import WebSearchResults from "@/components/WebSearchResults";
+import { resolve } from "styled-jsx/css";
 
 export default async function WebSearchPage({ searchParams }) {
 
   const startIndex = searchParams.start || '1';
+  await new Promise((resolve) => setTimeout(resolve,1000));
   const searchTerm = searchParams.searchTerm; // ✅ Use dot notation for plain object
 
   if (!searchTerm) {
@@ -11,7 +13,7 @@ export default async function WebSearchPage({ searchParams }) {
   }
 
   const response = await fetch(
-    `https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}x&cx=${process.env.CONTEXT_KEY}&q=${searchTerm}&start=${startIndex}`
+    `https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${searchTerm}&start=${startIndex}`
   );
 
   if (!response.ok) {
