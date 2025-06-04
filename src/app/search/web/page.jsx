@@ -1,6 +1,6 @@
 import Link from "next/link";
 import WebSearchResults from "@/components/WebSearchResults";
-import { resolve } from "styled-jsx/css";
+
 
 export default async function WebSearchPage({ searchParams }) {
 
